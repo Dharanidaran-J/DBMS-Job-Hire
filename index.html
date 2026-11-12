@@ -16,21 +16,6 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="static/css/style.css">
     <style>
-        .demo-top-bar {
-            background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
-            color: #ffffff;
-            padding: 8px 16px;
-            font-size: 0.85rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            position: sticky;
-            top: 0;
-            z-index: 2000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-        }
         .demo-pill {
             display: inline-flex;
             align-items: center;
@@ -43,21 +28,6 @@
             font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 16px;
-        }
-        .nav-view-btn {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 6px;
-            padding: 5px 12px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .nav-view-btn:hover, .nav-view-btn.active {
-            background: #ffffff;
-            color: #0f172a;
         }
         .view-section {
             display: none;
@@ -133,19 +103,6 @@
 </head>
 <body>
 
-    <!-- Interactive Demo Banner & Mode Switcher -->
-    <div class="demo-top-bar">
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="background: #10b981; color: white; padding: 2px 8px; border-radius: 9999px; font-size: 0.75rem; font-weight: 700;">LIVE DEMO</span>
-            <span><strong>Interactive GitHub Mode:</strong> Explore full student & recruiter workflows in browser.</span>
-        </div>
-        <div style="display: flex; gap: 8px; align-items: center;">
-            <button onclick="switchView('home')" id="btn-view-home" class="nav-view-btn active">🌐 Home Landing</button>
-            <button onclick="switchView('student')" id="btn-view-student" class="nav-view-btn">🎓 Student Dashboard</button>
-            <button onclick="switchView('recruiter')" id="btn-view-recruiter" class="nav-view-btn">💼 Recruiter Dashboard</button>
-        </div>
-    </div>
-
     <!-- Navigation Bar -->
     <header class="navbar">
         <div class="container nav-container">
@@ -156,9 +113,9 @@
 
             <nav>
                 <ul class="nav-links">
-                    <li><a href="javascript:void(0)" onclick="switchView('home')" class="nav-link">Home</a></li>
-                    <li><a href="javascript:void(0)" onclick="switchView('student')" class="nav-link">Student Portal</a></li>
-                    <li><a href="javascript:void(0)" onclick="switchView('recruiter')" class="nav-link">Recruiter Portal</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('home')" id="nav-link-home" class="nav-link active">Home</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('student')" id="nav-link-student" class="nav-link">Student Portal</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('recruiter')" id="nav-link-recruiter" class="nav-link">Recruiter Portal</a></li>
                     <li><a href="javascript:void(0)" onclick="switchView('home'); setTimeout(() => document.getElementById('ai-features').scrollIntoView({behavior: 'smooth'}), 100)" class="nav-link">AI Matcher</a></li>
                 </ul>
             </nav>
@@ -847,13 +804,13 @@
         // View Switcher logic
         function switchView(viewName) {
             document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
-            document.querySelectorAll('.nav-view-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.nav-links .nav-link').forEach(link => link.classList.remove('active'));
             
             const targetView = document.getElementById('view-' + viewName);
-            const targetBtn = document.getElementById('btn-view-' + viewName);
+            const targetNav = document.getElementById('nav-link-' + viewName);
             
             if (targetView) targetView.classList.add('active');
-            if (targetBtn) targetBtn.classList.add('active');
+            if (targetNav) targetNav.classList.add('active');
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
