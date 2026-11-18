@@ -197,12 +197,16 @@
 
                     <div style="border-top: 1px solid var(--border-light); padding-top: 14px;">
                         {% if g.user and g.user.role == 'student' %}
-                            <a href="{{ url_for('student.challenge_detail', challenge_id=ch.id) }}" class="btn btn-sm btn-outline-primary" style="width: 100%;">
-                                Accept Challenge
+                            <a href="{{ url_for('student.challenge_detail', challenge_id=ch.id) }}" class="btn btn-sm btn-primary" style="width: 100%;">
+                                Accept Challenge &rarr;
+                            </a>
+                        {% elif g.user and g.user.role == 'recruiter' %}
+                            <a href="{{ url_for('recruiter.manage_challenges') }}" class="btn btn-sm btn-outline-primary" style="width: 100%;">
+                                Manage Challenge (Recruiter)
                             </a>
                         {% else %}
                             <a href="{{ url_for('auth.login') }}" class="btn btn-sm btn-outline-primary" style="width: 100%;">
-                                Start Challenge
+                                Start Challenge (Student Login)
                             </a>
                         {% endif %}
                     </div>
